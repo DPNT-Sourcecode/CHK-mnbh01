@@ -109,12 +109,19 @@ def checkout(*args) -> int:
     total = 0
 
     # apply group discounts. Not convinced they are always better value than multi-buys though...
+    discount_cart = deepcopy(cart)
     checking = True
     while checking:
         checking = False
 
         for discount_spec, discount_price in GROUP_DISCOUNTS.items():
+            count = 0
             quantity, products = discount_spec
+            while product in products:
+                count += 1
+                discount_cart[product] -= 1
+                if discount_cart[product] == 0:
+                    del discount_cart[product]
 
 
     for product, quantity in cart.items():
@@ -132,6 +139,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
