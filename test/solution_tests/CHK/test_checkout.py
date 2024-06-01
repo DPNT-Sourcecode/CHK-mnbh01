@@ -144,8 +144,8 @@ class CheckoutTest(unittest.TestCase):
     def test_group_discounts(self):
         for skus, expected in (
             # ('ST', 40),
-            ('STS', 45),
-            # ('STST', 65),
+            # ('STS', 45),
+            ('STST', 65),
             # ('STSTS', 85),
             # ('STSTST', 90),
             # ('STX', 45),
@@ -157,3 +157,4 @@ class CheckoutTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
