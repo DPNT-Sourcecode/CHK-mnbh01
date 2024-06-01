@@ -25,7 +25,7 @@ def _condense_skus(skus: str) -> dict:
 def checkout(*args) -> int:
     skus = args[0]  # as per spec which says param[0] i.e. expect a list
 
-    condensed = _condense_skus(skus)
+    cart = _condense_skus(skus)
 
     # with the introduction of freebies, it's really interesting - 
     # which do we apply first: the freebies, or the multi-buy discount?!
@@ -33,11 +33,15 @@ def checkout(*args) -> int:
     # here's my logic -> the multi-buy on Bs is worth 15 to the customer, but a free B
     # is worth 30 -> so if we can give them a free B, we do that BEFORE applying multi-buys
 
-    for product, freebie in FREEBIES.items():
+    for product, freebie_desc in FREEBIES.items():
+        required_quantity = freebie_desc.keys()
+        qualifies = product in cart and cart[product] >= required_quantity
+        if qualifies:
+            freebie = freebie_desc.values()[0]
 
 
     total = 0
-    for product, quantity in condensed.items():
+    for product, quantity in cart.items():
         prices = PRICES.get(product)
         if not prices:
             return -1  # cart invalid, as per spec
@@ -52,4 +56,5 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
