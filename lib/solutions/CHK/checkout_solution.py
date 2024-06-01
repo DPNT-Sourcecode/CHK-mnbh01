@@ -16,7 +16,7 @@ def _condense_skus(skus: str) -> str:
         else:
             count += 1
 
-    result += f'{count}{skus_sorted[i]}'    
+    result += f'{count}{skus_sorted[i]}'
     return result
 
 
@@ -28,6 +28,7 @@ def checkout(*args) -> int:
     # to allow the special prices, sort the string of SKUs and condense into algebraic notation
     # i.e. AAABBC -> 3A2B1C
     condensed = _condense_skus(skus)
+
 
 
 
