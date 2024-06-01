@@ -129,12 +129,21 @@ class CheckoutTest(unittest.TestCase):
             ('RRR', 150),
             ('RRRQ', 150),
 
+            ('U'*3, 120),
+            ('U'*4, 120),
+            ('U'*5, 160),
+
+            ('V'*2, 90),
+            ('V'*3, 130),
+            ('V'*4, 180),
+
         ):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
 
