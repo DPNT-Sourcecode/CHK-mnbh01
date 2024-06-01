@@ -85,9 +85,20 @@ class CheckoutTest(unittest.TestCase):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
 
+    def test_new_policies_r04(self):
+        '''These should probably go in the other tests but I'm flagging a bit and don't want to
+        lost track of which ones are tested / untested'''
+        for skus, expected in (
+            ('AAA', 130),
+            ('AAAAA', 200),
+            ('A'*8, 330),
+        ):
+            with self.subTest(f'{skus=}'):
+                self.assertEqual(checkout(skus), expected)
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
 
