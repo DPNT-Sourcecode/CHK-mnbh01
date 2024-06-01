@@ -21,12 +21,23 @@ def checkout(*args) -> int:
     skus = args[0]  # as per spec which says param[0] i.e. expect a list
 
     condensed = _condense_skus(skus)
+
+    total = 0
     for product, quantity in condensed.items():
         prices = PRICES.get(product)
         if not prices:
             return -1  # cart invalid, as per spec
         
         # find the maximum multi-buy and apply that
-        multibuys_sorted = sorted(quantity.keys(), reverse=True)
+        multibuys_sorted = sorted(prices.keys(), reverse=True)
+        import pdb; pdb.set_trace()
+        while quantity > 0:
+            for multibuy in multibuys_sorted:
+                if quantity > multibuy:
+                    quantity -= multibuy
+                    total += prices[multibuy]
+        
+        return total
+
 
 
