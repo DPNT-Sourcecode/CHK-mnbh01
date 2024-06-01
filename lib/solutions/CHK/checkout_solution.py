@@ -1,4 +1,5 @@
 from collections import Counter
+from copy import deepcopy
 
 
 PRICES = {
@@ -38,18 +39,22 @@ def checkout(*args) -> int:
     # here's my logic -> the multi-buy on Bs is worth 15 to the customer, but a free B
     # is worth 30 -> so if we can give them a free B, we do that BEFORE applying multi-buys
 
+    # in order to apply the same freebie multiple times, we need to update a cart variable
+    # Otherwise, we will apply freebies forever
+    freebie_cart = deepcopy(cart)
+
     for freebie_desc in FREEBIES:
         for requirements, freebies in freebie_desc.items():
             meets_requirements = []
             for i in range(int(len(requirements) / 2)):
                 product, required_quantity = requirements[i], requirements[i+1]
-                if product in cart and cart[product] >= required_quantity:
+                if product in freebie_cart and freebie_cart[product] >= required_quantity:
                     meets_requirements.append(True)
                 else:
                     meets_requirements.append(False)
             
             if all(meets_requirements):
-                # deduct from cart
+                # update BOTH carts
                 for product, freebie_quantity in freebies.items():
                     if product in cart and cart[product] >= freebie_quantity:
                         cart[product] -= freebie_quantity
@@ -70,6 +75,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
