@@ -114,15 +114,20 @@ def checkout(*args) -> int:
     while checking:
         checking = False
 
+        import pdb; pdb.set_trace()
         for discount_spec, discount_price in GROUP_DISCOUNTS.items():
             count = 0
-            quantity, products = discount_spec
-            while product in products:
-                count += 1
-                discount_cart[product] -= 1
-                if discount_cart[product] == 0:
-                    del discount_cart[product]
+            required_quantity, products = discount_spec
+            for product in products:
+                while product in discount_cart:
+                    count += 1
+                    discount_cart[product] -= 1
+                    if discount_cart[product] == 0:
+                        del discount_cart[product]
 
+                    if count >= required_quantity:
+                        total += discount_price
+                        cart = deepcopy(discount_cart)
 
     for product, quantity in cart.items():
         prices = PRICES.get(product)
@@ -139,10 +144,3 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
-
-
-
-
-
-
-
