@@ -54,7 +54,8 @@ FREEBIES = [
 
 
 GROUP_DISCOUNTS = {
-    (3, ('S', 'T', 'X', 'Y', 'Z')): 45,
+    # put most expensive products at start to remove as many of those as possible
+    (3, ('Z', 'Y', 'S', 'T', 'X')): 45,
 }
 
 
@@ -108,9 +109,13 @@ def checkout(*args) -> int:
     total = 0
 
     # apply group discounts. Not convinced they are always better value than multi-buys though...
-    for discount_spec, discount_price in GROUP_DISCOUNTS.items():
-        quantity, products = discount_spec
-        
+    checking = True
+    while checking:
+        checking = False
+
+        for discount_spec, discount_price in GROUP_DISCOUNTS.items():
+            quantity, products = discount_spec
+
 
     for product, quantity in cart.items():
         prices = PRICES.get(product)
@@ -127,6 +132,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
