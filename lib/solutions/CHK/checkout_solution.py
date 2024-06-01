@@ -24,7 +24,6 @@ def checkout(*args) -> int:
 
     total = 0
     for product, quantity in condensed.items():
-        import pdb; pdb.set_trace()
         prices = PRICES.get(product)
         if not prices:
             return -1  # cart invalid, as per spec
@@ -36,8 +35,10 @@ def checkout(*args) -> int:
                 if quantity >= multibuy:
                     quantity -= multibuy
                     total += prices[multibuy]
+                    break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
