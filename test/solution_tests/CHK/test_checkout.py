@@ -71,9 +71,9 @@ class CheckoutTest(unittest.TestCase):
             ('EE', 80),  # 2E 0B -> No freebie
             ('EB', 70),  # 1E 1B -> No freebie
             ('EEB', 80),  # 2E 1B -> 1 freebie
-            # ('EEBB', 110),  # 2E 2B -> 1 freebie
-            # ('EEEEBB', 160),  # 4E 2B -> 2 freebies
-            # ('EEEEEBB', 200),  # 5E 2B -> 2 freebies
+            ('EEBB', 110),  # 2E 2B -> 1 freebie
+            ('EEEEBB', 160),  # 4E 2B -> 2 freebies
+            ('EEEEEBB', 200),  # 5E 2B -> 2 freebies
         ):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
@@ -81,4 +81,5 @@ class CheckoutTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
