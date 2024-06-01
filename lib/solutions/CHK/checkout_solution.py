@@ -52,12 +52,17 @@ def checkout(*args) -> int:
                     meets_requirements.append(True)
                 else:
                     meets_requirements.append(False)
+                    break
             
+            import pdb; pdb.set_trace()
             if all(meets_requirements):
                 # update BOTH carts
                 for product, freebie_quantity in freebies.items():
                     if product in cart and cart[product] >= freebie_quantity:
                         cart[product] -= freebie_quantity
+                        for i in range(int(len(requirements) / 2)):
+                            product, required_quantity = requirements[i], requirements[i+1]
+                            freebie_cart[product] -= required_quantity
 
     total = 0
     for product, quantity in cart.items():
@@ -75,6 +80,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
