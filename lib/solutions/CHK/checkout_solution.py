@@ -6,6 +6,11 @@ PRICES = {
     'B': {1: 30, 2: 45},
     'C': {1: 20},
     'D': {1: 15},
+    'E': {1: 40}
+}
+
+FREEBIES = {
+    'E': {2: {'B': 1}}  # can see the next iteration saying 'buy 4 Es, get 3Bs free'
 }
 
 
@@ -38,6 +43,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 

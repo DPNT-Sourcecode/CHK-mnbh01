@@ -48,9 +48,9 @@ class CheckoutTest(unittest.TestCase):
             ('A'*2, 100),
             ('A'*3, 130),
             ('A'*4, 180),
-            ('A'*5, 230),
-            ('A'*6, 260),
-            ('A'*7, 310),
+            ('A'*5, 200),
+            ('A'*6, 250),
+            ('A'*7, 300),
         ):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
@@ -68,6 +68,7 @@ class CheckoutTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
 
