@@ -16,8 +16,10 @@ class CheckoutTest(unittest.TestCase):
 
     def test_condense(self):
         for skus, expected in (
-            ('ABC','1A1B1C'),
-            ('AAABBC','3A2B1C'),
+            ('', ''),
+            ('C', '1C'),
+            ('ABC', '1A1B1C'),
+            ('AAABBC', '3A2B1C'),
         ):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(_condense_skus(skus), expected)
@@ -29,4 +31,5 @@ class CheckoutTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
