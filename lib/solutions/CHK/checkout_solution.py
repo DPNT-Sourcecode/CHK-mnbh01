@@ -53,6 +53,11 @@ FREEBIES = [
 ]
 
 
+GROUP_DISCOUNTS = {
+    (3, ('S', 'T', 'X', 'Y', 'Z')): 45,
+}
+
+
 def _condense_skus(skus: str) -> dict:
     if not skus:
         return {}
@@ -66,16 +71,9 @@ def checkout(*args) -> int:
 
     cart = _condense_skus(skus)
 
-    # with the introduction of freebies, it's really interesting - 
-    # which do we apply first: the freebies, or the multi-buy discount?!
-    # I figure this is what the 'always favor the customer' statement is about...
-    # here's my logic -> the multi-buy on Bs is worth 15 to the customer, but a free B
-    # is worth 30 -> so if we can give them a free B, we do that BEFORE applying multi-buys
-
-    # in order to apply the same freebie multiple times, we need to update a cart variable
-    # Otherwise, we will apply freebies forever
+    # Apply freebies first. They are a better saving that multi-buys? Not sure if always true...
+    # Need to update a freebie cart variable. Otherwise, we will apply freebies forever.
     freebie_cart = deepcopy(cart)
-
     checking = True
     while checking:
         checking = False
@@ -97,9 +95,16 @@ def checkout(*args) -> int:
                         if product in cart and cart[product] >= freebie_quantity:
                             cart[product] -= freebie_quantity
                             for i in range(int(len(requirements) / 2)):
-                                freebie_product, required_quantity = requirements[i], requirements[i+1]
+                                freebie_product = requirements[i]
+                                required_quantity = requirements[i+1]
                                 freebie_cart[freebie_product] -= required_quantity
                                 checking = True
+
+    # the freebie code above isn't very clean... but it works. And refactoring is outside of scope 
+    # given that this is a timed test.
+
+    # apply group discounts
+
 
     total = 0
     for product, quantity in cart.items():
@@ -117,5 +122,6 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
