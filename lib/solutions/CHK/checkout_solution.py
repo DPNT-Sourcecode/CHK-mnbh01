@@ -21,4 +21,12 @@ def checkout(*args) -> int:
     skus = args[0]  # as per spec which says param[0] i.e. expect a list
 
     condensed = _condense_skus(skus)
+    for product, quantity in condensed.items():
+        prices = PRICES.get(product)
+        if not prices:
+            return -1  # cart invalid, as per spec
+        
+        # find the maximum multi-buy and apply that
+        multibuys_sorted = sorted(quantity.keys(), reverse=True)
+
 
