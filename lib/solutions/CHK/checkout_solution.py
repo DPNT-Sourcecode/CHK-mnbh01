@@ -43,26 +43,30 @@ def checkout(*args) -> int:
     # Otherwise, we will apply freebies forever
     freebie_cart = deepcopy(cart)
 
-    for freebie_desc in FREEBIES:
-        for requirements, freebies in freebie_desc.items():
-            meets_requirements = []
-            for i in range(int(len(requirements) / 2)):
-                product, required_quantity = requirements[i], requirements[i+1]
-                if product in freebie_cart and freebie_cart[product] >= required_quantity:
-                    meets_requirements.append(True)
-                else:
-                    meets_requirements.append(False)
-                    break
-            
-            import pdb; pdb.set_trace()
-            if all(meets_requirements):
-                # update BOTH carts
-                for product, freebie_quantity in freebies.items():
-                    if product in cart and cart[product] >= freebie_quantity:
-                        cart[product] -= freebie_quantity
-                        for i in range(int(len(requirements) / 2)):
-                            freebie_product, required_quantity = requirements[i], requirements[i+1]
-                            freebie_cart[freebie_product] -= required_quantity
+    checking = True
+    while checking:
+        checking = False
+
+        for freebie_desc in FREEBIES:
+            for requirements, freebies in freebie_desc.items():
+                meets_requirements = []
+                for i in range(int(len(requirements) / 2)):
+                    product, required_quantity = requirements[i], requirements[i+1]
+                    if product in freebie_cart and freebie_cart[product] >= required_quantity:
+                        meets_requirements.append(True)
+                    else:
+                        meets_requirements.append(False)
+                        break
+                
+                if all(meets_requirements):
+                    # update BOTH carts
+                    for product, freebie_quantity in freebies.items():
+                        if product in cart and cart[product] >= freebie_quantity:
+                            cart[product] -= freebie_quantity
+                            for i in range(int(len(requirements) / 2)):
+                                freebie_product, required_quantity = requirements[i], requirements[i+1]
+                                freebie_cart[freebie_product] -= required_quantity
+                                checking = True
 
     total = 0
     for product, quantity in cart.items():
@@ -80,3 +84,4 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
