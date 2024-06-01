@@ -6,7 +6,3 @@ def hello(*args) -> str:
     if args[0] is None:
         return 'Hello'
     return f'Hello, {args[0]}!'
-
-
-
-
