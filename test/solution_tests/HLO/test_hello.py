@@ -15,11 +15,12 @@ class HelloTest(unittest.TestCase):
             with self.subTest(f'{friend_name=}'):
                 result = hello(friend_name)
                 if friend_name is None:
-                    self.assertEqual(result, 'hello')
+                    self.assertEqual(result, 'Hello')
                 else:
                     self.assertIn(str(friend_name), result)
 
 
 if __name__ == '__main__':
     unittest.main()
+
 
