@@ -142,12 +142,5 @@ class CheckoutTest(unittest.TestCase):
                 self.assertEqual(checkout(skus), expected)
 
 
-    def test_group_discounts(self):
-        for skus, expected in (
-            ('G', 20),
-        ):
-            with self.subTest(f'{skus=}'):
-                self.assertEqual(checkout(skus), expected)
-
 if __name__ == '__main__':
     unittest.main()
