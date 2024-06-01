@@ -34,8 +34,8 @@ class CheckoutTest(unittest.TestCase):
 
     def test_checkout_invalid(self):
         for skus, expected in (
-            ('Z', -1),  # invalid only
-            ('AZ', -1),  # mix valid + invalid
+            ('-', -1),  # invalid only
+            ('A-', -1),  # mix valid + invalid
         ):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
@@ -88,5 +88,6 @@ class CheckoutTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
