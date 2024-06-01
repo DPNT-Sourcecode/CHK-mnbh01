@@ -27,6 +27,12 @@ def checkout(*args) -> int:
 
     condensed = _condense_skus(skus)
 
+    # with the introduction of freebies, it's really interesting - 
+    # which do we apply first: the freebies, or the multi-buy discount?!
+    # I figure this is what the 'always favor the customer' statement is about...
+    # here's my logic -> the multi-buy on Bs is worth 15 to the customer, but a free B
+    # is worth 30 -> so if we can give them a free B, we do that BEFORE applying multi-buys
+
     total = 0
     for product, quantity in condensed.items():
         prices = PRICES.get(product)
@@ -43,6 +49,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
