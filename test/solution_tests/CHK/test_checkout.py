@@ -88,16 +88,39 @@ class CheckoutTest(unittest.TestCase):
     def test_new_policies_r04(self):
         '''These should probably go in the other tests but I'm flagging a bit and don't want to
         lost track of which ones are tested / untested'''
+        # I want to avoid a penalty, so I'm gonna code up all the new singles as well...
         for skus, expected in (
-            ('AAA', 130),
-            ('AAAAA', 200),
-            ('A'*8, 330),
+            ('G', 20),
+            ('H', 10),
+            ('I', 35),
+            ('J', 60),
+            ('K', 80),
+            ('L', 90),
+            ('M', 15),
+            ('N', 40),
+            ('O', 10),
+            ('P', 50),
+            ('Q', 30),
+            ('R', 50),
+            ('S', 30),
+            ('T', 20),
+            ('U', 40),
+            ('V', 50),
+            ('W', 20),
+            ('X', 90),
+            ('Y', 10),
+            ('Z', 50),
+
+            ('H'*5, 45),
+            ('H'*10, 80),
+            ('H'*15, 125),
         ):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
 
