@@ -49,11 +49,3 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
-
-
-
-
-
-
-
-

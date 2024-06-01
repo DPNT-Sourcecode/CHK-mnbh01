@@ -66,10 +66,15 @@ class CheckoutTest(unittest.TestCase):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
 
+    def test_checkout_with_freebies(self):
+        for skus, expected in (
+            ('EB', 70),
+            ('EEB', 80),
+            ('EEBB', 110),
+            ('EEEEBB', 160),
+        ):
+            with self.subTest(f'{skus=}'):
+                self.assertEqual(checkout(skus), expected)
+
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
