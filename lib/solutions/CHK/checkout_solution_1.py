@@ -2,7 +2,7 @@ from collections import Counter
 
 
 PRICES = {
-    'A': {1: 50, 3: 130, 5: 200},
+    'A': {1: 50, 3: 130},
     'B': {1: 30, 2: 45},
     'C': {1: 20},
     'D': {1: 15},
@@ -38,9 +38,3 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
-
-
-
-
-
-
