@@ -1,5 +1,7 @@
 
-def _condense_skus(skus_sorted: str) -> str:
+def _condense_skus(skus: str) -> str:
+    skus_sorted = sorted(skus)
+    
     if not skus_sorted:
         return ''
     if len(skus_sorted) == 1:
@@ -20,12 +22,13 @@ def _condense_skus(skus_sorted: str) -> str:
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-def checkout(*args):
+def checkout(*args) -> int:
     skus = args[0]  # as per spec which says param[0] i.e. expect a list
 
     # to allow the special prices, sort the string of SKUs and condense into algebraic notation
     # i.e. AAABBC -> 3A2B1C
-    skus_sorted = sorted(skus)
+    condensed = _condense_skus(skus)
+
 
 
 

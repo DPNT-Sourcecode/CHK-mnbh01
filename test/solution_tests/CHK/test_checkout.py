@@ -28,13 +28,17 @@ class CheckoutTest(unittest.TestCase):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(_condense_skus(skus), expected)
 
-
     def test_checkout_singles(self):
-        pass
+        for skus, expected in (
+            ('A', 50),
+        ):
+            with self.subTest(f'{skus=}'):
+                self.assertEqual(checkout(skus), expected)
 
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
 
