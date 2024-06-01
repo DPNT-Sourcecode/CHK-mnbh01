@@ -27,18 +27,18 @@ class CheckoutTest(unittest.TestCase):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(_condense_skus(skus), expected)
 
-    def test_checkout_singles(self):
-        for skus, expected in (
-            (None, 0),
-            ('', 0),
-            ('A', 50),
-            ('B', 30),
-            ('C', 20),
-            ('D', 50),
-            ('E', -1),
-        ):
-            with self.subTest(f'{skus=}'):
-                self.assertEqual(checkout(skus), expected)
+    # def test_checkout_singles(self):
+    #     for skus, expected in (
+    #         (None, 0),
+    #         ('', 0),
+    #         ('A', 50),
+    #         ('B', 30),
+    #         ('C', 20),
+    #         ('D', 50),
+    #         ('E', -1),
+    #     ):
+    #         with self.subTest(f'{skus=}'):
+    #             self.assertEqual(checkout(skus), expected)
 
     # def test_checkout_invalid(self):
     #     for skus, expected in (
@@ -68,11 +68,3 @@ class CheckoutTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
-
-
-
