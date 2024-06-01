@@ -37,7 +37,7 @@ def checkout(*args) -> int:
         required_quantity = freebie_desc.keys()
         qualifies = product in cart and cart[product] >= required_quantity
         if qualifies:
-            freebie = freebie_desc.values()[0]
+            freebie = freebie_desc.values()[0]  # assuming only one for now... risky.
 
 
     total = 0
@@ -56,5 +56,6 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
