@@ -40,12 +40,19 @@ def checkout(*args) -> int:
 
     for freebie_desc in FREEBIES:
         for requirements, freebies in freebie_desc.items():
-        required_quantity = freebie_desc.keys()
-        qualifies = product in cart and cart[product] >= required_quantity
-        if qualifies:
-            freebie = freebie_desc.values()[0]  # assuming only one for now... risky.
-            freebie_product, freebie_quantity = freebie.items()
-
+            meets_requirements = []
+            for i in range(int(len(requirements) / 2)):
+                product, required_quantity = requirements[i], requirements[i+1]
+                if product in cart and cart[product] >= required_quantity:
+                    meets_requirements.append(True)
+                else:
+                    meets_requirements.append(False)
+            
+            if all(meets_requirements):
+                # deduct from cart
+                for product, freebie_quantity in freebies.items():
+                    if product in cart and cart[product] >= quantity:
+                        cart[product] -= freebie_quantity
 
     total = 0
     for product, quantity in cart.items():
@@ -63,6 +70,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
