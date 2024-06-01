@@ -108,7 +108,9 @@ def checkout(*args) -> int:
     total = 0
 
     # apply group discounts. Not convinced they are always better value than multi-buys though...
-
+    for discount_spec, discount_price in GROUP_DISCOUNTS.items():
+        quantity, products = discount_spec
+        
 
     for product, quantity in cart.items():
         prices = PRICES.get(product)
@@ -125,6 +127,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 

@@ -142,15 +142,17 @@ class CheckoutTest(unittest.TestCase):
                 self.assertEqual(checkout(skus), expected)
 
     def test_group_discounts(self):
-        # prices have been changed... that means tests need to be updated too.
         for skus, expected in (
-            ('G', 20),
+            ('ST', 40),
+            ('STS', 45),
+            ('STST', 65),
         ):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
 
