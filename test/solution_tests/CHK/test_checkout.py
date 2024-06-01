@@ -146,12 +146,18 @@ class CheckoutTest(unittest.TestCase):
             ('ST', 40),
             ('STS', 45),
             ('STST', 65),
+            ('STSTS', 85),
+            ('STSTST', 90),
+            ('STX', 45),
+            ('XYZ', 45),
+            ('XZZX', 45 + 17),  # most expensive ones should be free (to favor the customer)
         ):
             with self.subTest(f'{skus=}'):
                 self.assertEqual(checkout(skus), expected)
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
 
