@@ -9,9 +9,14 @@ PRICES = {
     'E': {1: 40}
 }
 
-FREEBIES = {
-    'E': {2: {'B': 1}}  # can see the next iteration saying 'buy 4 Es, get 3Bs free'
-}
+FREEBIES = [
+    # tuple of products and required quantities as key
+    # freebie amounts as values
+    # put the most valuable freebie offers first
+    {
+        ('E', 2): {'B': 1},
+    }
+]
 
 
 def _condense_skus(skus: str) -> dict:
@@ -33,11 +38,13 @@ def checkout(*args) -> int:
     # here's my logic -> the multi-buy on Bs is worth 15 to the customer, but a free B
     # is worth 30 -> so if we can give them a free B, we do that BEFORE applying multi-buys
 
-    for product, freebie_desc in FREEBIES.items():
+    for freebie_desc in FREEBIES:
+        for requirements, freebies in freebie_desc.items():
         required_quantity = freebie_desc.keys()
         qualifies = product in cart and cart[product] >= required_quantity
         if qualifies:
             freebie = freebie_desc.values()[0]  # assuming only one for now... risky.
+            freebie_product, freebie_quantity = freebie.items()
 
 
     total = 0
@@ -56,6 +63,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
