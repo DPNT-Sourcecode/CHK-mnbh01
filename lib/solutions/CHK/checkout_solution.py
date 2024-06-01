@@ -102,11 +102,14 @@ def checkout(*args) -> int:
 
     # the freebie code above isn't very clean... but it works. And refactoring is outside of scope 
     # given that this is a timed test.
-
-    # apply group discounts
-
+    # I can see how this would be much cleaner with some classes for each of these domains...
+    # might try that later. But not now.
 
     total = 0
+
+    # apply group discounts. Not convinced they are always better value than multi-buys though...
+
+
     for product, quantity in cart.items():
         prices = PRICES.get(product)
         if not prices:
@@ -122,6 +125,7 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 
 
 
