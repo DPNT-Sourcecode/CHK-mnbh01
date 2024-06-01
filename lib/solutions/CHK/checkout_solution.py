@@ -26,9 +26,9 @@ PRICES = {
     'U': {1: 40},
     'V': {1: 50, 2: 90, 3: 130},
     'W': {1: 20},
-    'X': {1: 90},
-    'Y': {1: 10},
-    'Z': {1: 50},
+    'X': {1: 17},
+    'Y': {1: 20},
+    'Z': {1: 21},
 }
 
 FREEBIES = [
@@ -117,4 +117,5 @@ def checkout(*args) -> int:
                     break  # break out of FOR - want to re-apply the highest possible multibuy
         
     return total
+
 

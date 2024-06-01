@@ -86,8 +86,8 @@ class CheckoutTest(unittest.TestCase):
                 self.assertEqual(checkout(skus), expected)
 
     def test_new_policies_r04(self):
-        '''These should probably go in the other tests but I'm flagging a bit and don't want to
-        lost track of which ones are tested / untested'''
+        # These should probably go in the other tests but I'm flagging a bit and don't want to
+        # lose track of which ones are tested / untested
         # I want to avoid a penalty, so I'm gonna code up all the new singles as well...
         for skus, expected in (
             ('G', 20),
@@ -151,4 +151,5 @@ class CheckoutTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
